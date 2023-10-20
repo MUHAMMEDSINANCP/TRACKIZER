@@ -24,7 +24,6 @@ class TColor {
   static Color get gray30 => const Color(0xffA2A2B5);
   static Color get gray20 => const Color(0xffC1C1CD);
   static Color get gray10 => const Color(0xffE0E0E6);
-  static Color get red => Colors.red;
   static Color get green => Colors.green;
 
   static Color get border => const Color(0xffCFCFFC);
