@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cp_expenses/view/login/sign_in_view.dart';
-import 'package:cp_expenses/view/login/social_login.dart';
+import 'package:trackizer/view/login/sign_in_view.dart';
+import 'package:trackizer/view/login/social_login.dart';
+
 import '../../common/color_extension.dart';
 import '../../common_widget/primary_button.dart';
 import '../../common_widget/secondary_boutton.dart';

@@ -1,10 +1,11 @@
-import 'package:cp_expenses/common_widget/custom_underline.dart';
-import 'package:cp_expenses/view/main_tab/main_tab_view.dart';
+
 import 'package:flutter/material.dart';
 import '../../common/color_extension.dart';
+import '../../common_widget/custom_underline.dart';
 import '../../common_widget/primary_button.dart';
 import '../../common_widget/round_textfield.dart';
 import '../../common_widget/secondary_boutton.dart';
+import '../main_tab/main_tab_view.dart';
 import 'sign_in_view.dart';
 
 class SignUpView extends StatefulWidget {
