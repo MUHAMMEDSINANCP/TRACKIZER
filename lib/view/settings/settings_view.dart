@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trackizer/view/login/welcome_view.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/icon_item_row.dart';
@@ -12,10 +15,32 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   bool isActive = false;
+  String userName = "";
+  String email = "";
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
+
+  void fetchUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      setState(() {
+        userName = userSnapshot['name'];
+        email = user.email!;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.sizeOf(context);
+    // var media = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: TColor.gray,
       body: SingleChildScrollView(
@@ -69,7 +94,7 @@ class _SettingsViewState extends State<SettingsView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Muhammed Sinan CP",
+                  userName,
                   style: TextStyle(
                       color: TColor.white,
                       fontSize: 19,
@@ -84,10 +109,10 @@ class _SettingsViewState extends State<SettingsView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "cpmuhammedsinan@gmail.com",
+                  email,
                   style: TextStyle(
                       color: TColor.secondary.withOpacity(0.6),
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w500),
                 )
               ],
@@ -111,6 +136,27 @@ class _SettingsViewState extends State<SettingsView> {
                   "Edit profile",
                   style: TextStyle(
                       color: TColor.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            InkWell(
+              onTap: _signOut,
+              child: Container(
+                padding: const EdgeInsets.all(7),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: TColor.border.withOpacity(0.15),
+                  ),
+                  color: TColor.gray60.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Text(
+                  "Sign Out",
+                  style: TextStyle(
+                      color: Colors.red,
                       fontSize: 12,
                       fontWeight: FontWeight.w600),
                 ),
@@ -244,6 +290,74 @@ class _SettingsViewState extends State<SettingsView> {
           ]),
         ),
       ),
+    );
+  }
+
+  void _signOut() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(
+            child: Text(
+              "Sign Out",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          content: RichText(
+            text: TextSpan(
+              children: [
+                const TextSpan(
+                  text: "Are you sure you want to sign out from ",
+                  style: TextStyle(color: Colors.black),
+                ),
+                TextSpan(
+                  text: "TRACKIZER",
+                  style: TextStyle(
+                    color: TColor.secondary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const TextSpan(
+                  text: "?",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                "Cancel",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        const WelcomeView(), // Replace with your LoginScreen widget
+                  ),
+                );
+              },
+              child: const Text(
+                "Sign Out",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

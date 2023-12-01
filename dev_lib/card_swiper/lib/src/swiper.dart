@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'dart:developer';
-import 'dart:math' as Math;
 
 import 'package:flutter/material.dart';
 
@@ -892,7 +891,7 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
   late List<double> rotates;
 
   void _updateValues() {
-    final spaceWidth = MediaQuery.sizeOf(context).width * 0.07;
+    // final spaceWidth = MediaQuery.sizeOf(context).width * 0.07;
     if (widget.scrollDirection == Axis.horizontal) {
       final space = (_swiperWidth - widget.itemWidth!) / 2 - 25;
       offsets = widget.axisDirection == AxisDirection.left

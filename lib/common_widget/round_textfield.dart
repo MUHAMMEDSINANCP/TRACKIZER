@@ -8,13 +8,19 @@ class RoundTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextAlign titleAlign;
   final bool obscureText;
+  final Widget? suffixIcon;
+  final void Function(String)? onPasswordChanged;
+  final String? Function(String?)? validator;
+
   const RoundTextField(
       {super.key,
       required this.title,
       this.titleAlign = TextAlign.left,
       this.controller,
       this.keyboardType,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.suffixIcon,
+      this.validator, this.onPasswordChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +54,8 @@ class RoundTextField extends StatelessWidget {
               data: TextSelectionThemeData(
                 selectionColor: TColor.white,
               ),
-              child: TextField(
+              child: TextFormField(
+                validator: validator,
                 cursorColor: TColor.secondary,
                 cursorOpacityAnimates: true,
                 showCursor: true,
@@ -56,17 +63,24 @@ class RoundTextField extends StatelessWidget {
                   color: TColor.secondary,
                 ),
                 controller: controller,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  suffixIcon: suffixIcon,
                   focusedBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                 ),
                 keyboardType: keyboardType,
                 obscureText: obscureText,
+              onChanged: (password) {
+            if (onPasswordChanged != null) {
+              onPasswordChanged!(password);
+            }
+          },
               ),
             ),
           ),
-        )
+          
+        ),
       ],
     );
   }

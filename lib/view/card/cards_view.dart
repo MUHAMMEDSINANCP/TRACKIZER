@@ -1,5 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
@@ -13,6 +15,27 @@ class CardsView extends StatefulWidget {
 }
 
 class _CardsViewState extends State<CardsView> {
+  String userName = "";
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
+
+  void fetchUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      setState(() {
+        userName = userSnapshot['name'];
+      });
+    }
+  }
+
   List subArr = [
     {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "5.99"},
     {
@@ -66,6 +89,7 @@ class _CardsViewState extends State<CardsView> {
           ]),
         fade: 1.0,
         onIndexChanged: (index) {
+          // ignore: avoid_print
           print(index);
         },
         scale: 0.8,
@@ -109,7 +133,7 @@ class _CardsViewState extends State<CardsView> {
                     height: 115,
                   ),
                   Text(
-                    cObj["name"] ?? "Muhammed Sinan CP",
+                    userName,
                     style: TextStyle(
                         color: TColor.gray20,
                         fontSize: 14,
