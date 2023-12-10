@@ -222,7 +222,7 @@ class _SignInViewState extends State<SignInView> {
                     },
                   ),
                   SizedBox(
-                    height: media.width * 0.2,
+                    height: media.width * 0.15,
                   ),
                   Text(
                     "if you don't have an account yet?",
@@ -230,7 +230,7 @@ class _SignInViewState extends State<SignInView> {
                     style: TextStyle(color: TColor.white, fontSize: 14),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   SecondaryButton(
                     title: "Sign up",

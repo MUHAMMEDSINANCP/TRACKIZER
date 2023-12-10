@@ -230,7 +230,7 @@ class _SignUpViewState extends State<SignUpView> {
                     },
                   ),
                   SizedBox(
-                    height: media.width * 0.18,
+                    height: media.width * 0.07,
                   ),
                   Text(
                     "Do you have already an account?",
@@ -238,7 +238,7 @@ class _SignUpViewState extends State<SignUpView> {
                     style: TextStyle(color: TColor.white, fontSize: 14),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   SecondaryButton(
                     title: "Sign in",
