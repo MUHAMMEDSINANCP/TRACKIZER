@@ -14,7 +14,7 @@ Data Security: Implementation of encryption methods for safeguarding sensitive f
 TRACKIZER streamlines financial management with real-time tracking, budgeting features, insightful data visualization, and stringent data security measures.
 
 ### Feedback:
-For any suggestions or feedback, please reach out at your@email.com. Your inputs are valuable in enhancing TRACKIZER.
+For any suggestions or feedback, please reach out at cpmuhammedsinan@gmail.com . Your inputs are valuable in enhancing TRACKIZER.
 
 ### Technologies Used:
 Firebase Authentication, Firebase Storage, Clean Architecture, Flutter State Management
