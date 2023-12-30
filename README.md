@@ -22,3 +22,4 @@ For any suggestions or feedback, please reach out at cpmuhammedsinan@gmail.com .
 
 ### Technologies Used :
 Firebase Authentication, Firebase Storage, Clean Architecture, Flutter State Management
+ 
