@@ -6,7 +6,7 @@ Utilizing Firebase Authentication and Storage, clean architecture, and Flutter s
 
 User Interface Design : Crafted with Flutter widgets and best practices for an intuitive experience.
 
-Expense Tracking : Real-time tracking and categorization of transactions.
+Expense Tracking : Real-time tracking and categorization of transactions. 
 
 Smart Budgeting : Personalized budget settings with alerts to prevent overspending.
 
